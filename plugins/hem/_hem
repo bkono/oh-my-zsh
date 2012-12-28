@@ -1,0 +1,36 @@
+#compdef hem
+#autoload
+
+# hem zsh completion, based on gem completion
+
+local -a _1st_arguments
+_1st_arguments=(
+  'server:start a dynamic development server'
+  'build:serialize application to disk'
+  'watch:build & watch disk for changes'
+)
+
+local expl
+local -a hem
+
+_arguments \
+  '(-v --version)'{-v,--version}'[show version]' \
+  '(-h --help)'{-h,--help}'[show help]' \
+  '*:: :->subcmds' && return 0
+
+if (( CURRENT == 1 )); then
+  _describe -t commands "hem subcommand" _1st_arguments
+  return
+fi
+
+#  case "$words[1]" in
+#    list)
+#        if [[ "$state" == forms ]]; then
+#          _gem_installed
+#          _requested installed_gems expl 'installed gems' compadd -a installed_gems
+#        fi ;;
+#    uninstall|update)
+#      _gem_installed
+#      _wanted installed_gems expl 'installed gems' compadd -a installed_gems ;;
+#  esac
+
